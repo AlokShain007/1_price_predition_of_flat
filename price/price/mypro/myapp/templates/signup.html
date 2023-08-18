@@ -1,0 +1,327 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Signup Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <!--Stylesheet-->
+    <style media="screen">
+        *,
+        *:before,
+        *:after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #080710;
+        }
+        
+        navbar{
+            position: fixed;
+        }
+        .background {
+            width: 90%;
+            max-width: 430px;
+            height: 520px;
+            margin: 0 auto;
+            position: relative;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+        }
+
+        .background .shape {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .shape:first-child {
+            background: linear-gradient(#1845ad, #23a2f6);
+            left: -80px;
+            top: -80px;
+        }
+
+        .shape:last-child {
+            background: linear-gradient(to right, #ff512f, #f09819);
+            right: -30px;
+            bottom: -80px;
+        }
+
+        form {
+            max-width: 550px;
+            width: 90%;
+            background-color: rgba(255, 255, 255, 0.13);
+            margin: 0 auto;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            padding: 50px 35px;
+        }
+
+        form * {
+            font-family: 'Poppins', sans-serif;
+            color: #070808;
+            letter-spacing: 0.5px;
+            outline: none;
+            border: none;
+        }
+
+        form h3 {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 42px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        input {
+            display: block;
+            height: 40px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 2px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        ::placeholder {
+            color: #000000;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            background-color: #ffffff;
+            color: #080710;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .social {
+            margin-top: 20px;
+            display: flex;
+        }
+
+        .social div {
+            flex: 1;
+            border-radius: 3px;
+            padding: 5px;
+            background-color: rgba(255, 255, 255, 0.27);
+            color: #eaf0fb;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .social div:hover {
+            background-color: rgba(255, 255, 255, 0.47);
+        }
+
+        .social .fb {
+            margin-left: 10px;
+        }
+
+        .social i {
+            margin-right: 4px;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+        form{
+            margin-top:6rem;
+        }
+        #bg {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top;
+            background-attachment: fixed;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .background {
+                width: 100%;
+                max-width: none;
+                height: auto;
+                position: static;
+                transform: none;
+                left: auto;
+                top: auto;
+                margin-bottom: 30px;
+            }
+
+          
+
+            form {
+                max-width: 100%;
+                width: 90%;
+                padding: 40px 20px;
+            }
+
+            form h3 {
+                font-size: 26px;
+                line-height: 36px;
+            }
+            nav img{
+                justify-content:center;
+            }
+            .rounded-circle{
+    display: none;
+}
+        }
+        
+
+    </style>
+</head>
+<body id="bg" style="background-image: url('{% static 'image/house6.jpg' %}');">
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <img src="https://www.mobiloitte.com/wp-content/uploads/2022/11/Mobiloitte_blue_logo.png" alt="logo" width="200" height="60">
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <div class="d-grid gap-2 d-md-block">
+                        
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <h3 class="sign">Signup Here</h3>
+
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username:</label>
+                        <input type="text" class="form-control" placeholder="Username" name="username" id="username" oninput="validateUsername()">
+                        <span id="usernameError" class="error"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" placeholder="Email or Phone" name="email" id="email" oninput="validateEmail()">
+                        <span id="emailError" class="error"></span>
+                        {% if message %}
+                        <p class="text-danger">{{ message }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password1" class="form-label">Password:</label>
+                        <input type="password" class="form-control" placeholder="Password" id="password1" name="password1" oninput="validatePassword()">
+                        <span id="passwordLengthError" class="error"></span>
+                        <span id="passwordComplexityError" class="error"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password2" class="form-label">Confirm Password:</label>
+                        <input type="password" class="form-control" placeholder="Confirm Password" id="password2" name="password2" oninput="validatePassword()">
+                        <span id="passwordMatchError" class="error"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Signup</button>
+
+                    <p class="text-center mt-3">Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateUsername() {
+            var username = document.getElementById("username").value;
+            var usernameError = document.getElementById("usernameError");
+
+            if (username.length < 4) {
+                usernameError.textContent = "Username must be at least 4 characters.";
+                usernameError.style.display = "inline";
+            } else if (!/^[a-z0-9@]+$/.test(username)) {
+                usernameError.textContent = "Username can only contain lowercase letters, '@', and numeric values.";
+                usernameError.style.display = "inline";
+            } else {
+                usernameError.style.display = "none";
+            }
+        }
+
+        function validateEmail() {
+            var email = document.getElementById("email").value;
+            var emailError = document.getElementById("emailError");
+
+            if (email === "") {
+                emailError.textContent = "Email is required.";
+                emailError.style.display = "inline";
+            } else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
+                emailError.textContent = "Invalid email address.";
+                emailError.style.display = "inline";
+            } else {
+                emailError.style.display = "none";
+            }
+        }
+
+        function validatePassword() {
+            var password1 = document.getElementById("password1").value;
+            var password2 = document.getElementById("password2").value;
+            var passwordLengthError = document.getElementById("passwordLengthError");
+            var passwordComplexityError = document.getElementById("passwordComplexityError");
+            var passwordMatchError = document.getElementById("passwordMatchError");
+
+            if (password1.length < 8) {
+                passwordLengthError.textContent = "Password must be at least 8 characters.";
+                passwordLengthError.style.display = "inline";
+            } else {
+                passwordLengthError.style.display = "none";
+            }
+
+            if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/.test(password1)) {
+                passwordComplexityError.textContent = "Password must contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character.";
+                passwordComplexityError.style.display = "inline";
+            } else {
+                passwordComplexityError.style.display = "none";
+            }
+
+            if (password1 !== password2) {
+                passwordMatchError.textContent = "Passwords do not match.";
+                passwordMatchError.style.display = "inline";
+            } else {
+                passwordMatchError.style.display = "none";
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Jg4XQn+cJNTF5qWm3q1wJXPTM5k/GsDqJZ8gNrTM+zP9Lwr5jUG8tXVoNsLn/l0H"
+        crossorigin="anonymous"></script>
+</body>
+</html>

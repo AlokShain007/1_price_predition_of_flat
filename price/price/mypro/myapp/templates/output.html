@@ -1,0 +1,99 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Real Estate Price Prediction</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    body {
+      background-image: url('{% static 'image/house9.jpg' %}');
+      background-size:cover;
+      background-repeat:no-repeat;
+      background-position:center;
+      min-height:100vh;
+    }
+
+    .navbar {
+      background-color: #efd489bf;
+    }
+
+    {% comment %} .navbar img {
+      margin-right: 10px;
+      border-radius: 50%;
+    } {% endcomment %}
+    .footer {
+            /* Footer styles */
+            position: absolute; /* Set the footer as a fixed element */
+            bottom: 0; /* Position the footer at the bottom */
+            width: 100%; /* Make sure the footer spans the full width */
+            /* background-color: #f5c660bd; */
+            color: #030303;
+            padding: 10px 0;
+        }
+    .card {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 30px;
+      margin-top: 100px;
+    }
+
+    .card-title {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .card-text {
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .btn-primary {
+      display: block;
+      margin: 20px auto;
+      width: 200px;
+    }
+
+    @media (max-width: 576px) {
+      .card {
+        margin-top: 50px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <img src="https://www.mobiloitte.com/wp-content/uploads/2022/11/Mobiloitte_blue_logo.png" alt="logo" width="200" height="60">
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+         
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h5 class="card-title">Expected Price!</h5>
+      {% if predicted_price %}
+        <p class="card-text">The predicted price of the Flat according to your requirements will be:</p>
+        <h3 class="card-text"> {{ predicted_price|floatformat:2  }} Lacs Rs </h3>
+      {% endif %}
+      <a href="{% url 'home' %}" class="btn btn-primary">Home</a>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <footer class="text-center py-3 mt-5 footer">
+    <p>&copy;2023 <b> Mobiloitte </b>All rights reserved.</p>
+</footer>
+</body>
+</html>

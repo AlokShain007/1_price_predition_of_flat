@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real Estate Comparison</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #336699;
+        }
+
+        h2 {
+            color: #336699;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Real Estate Comparison</h1>
+    <h2>Latest Prediction:</h2>
+    <p>Total Square Feet: {{ latest_prediction.total_sqft }}</p>
+    <p>Number of Bathrooms: {{ latest_prediction.bath }}</p>
+    <p>Number of Bedrooms (BHK): {{ latest_prediction.bhk }}</p>
+    <p>Predicted Price: {{ latest_prediction.price }}</p>
+    <p>Price per Square Foot: {{ latest_prediction.price_per_sqft }}</p>
+    
+    <h2>Similar Properties:</h2>
+    <ul>
+        {% for property in similar_properties %}
+            <li>
+                <p>Total Square Feet: {{ property.total_sqft }}</p>
+                <p>Number of Bathrooms: {{ property.bath }}</p>
+                <p>Number of Bedrooms (BHK): {{ property.bhk }}</p>
+                <p>Price: {{ property.price }}</p>
+                <p>Price per Square Foot: {{ property.price_per_sqft }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Add the canvas for the chart -->
+    <div style="width: 50%; margin: 20px auto;">
+        <canvas id="comparisonChart" width="400" height="200"></canvas>
+    </div>
+
+    <!-- JavaScript code for creating the comparison chart -->
+    <script>
+        var ctx = document.getElementById('comparisonChart').getContext('2d');
+        var labels = ['Latest Prediction', 'Similar Properties'];
+        var data = [
+            {{ latest_prediction.price_per_sqft|floatformat:2 }},
+            {% for property in similar_properties %}
+                {{ property.price_per_sqft|floatformat:2 }}{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        ];
+        var backgroundColor = 'rgba(54, 162, 235, 0.5)';
+        var borderColor = 'rgba(54, 162, 235, 1)';
+
+        var comparisonChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Price per Square Foot',
+                    data: data,
+                    backgroundColor: backgroundColor,
+                    borderColor: borderColor,
+                    borderWidth: 2,
+                    pointRadius: 5,
+                    pointBackgroundColor: borderColor,
+                    pointBorderColor: borderColor,
+                    pointHoverRadius: 8,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+</body>
+</html>
